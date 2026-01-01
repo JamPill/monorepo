@@ -7,6 +7,14 @@
     "lint": "turbo run lint",
     "generate:types": "turbo run generate:types"
   },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "sharp",
+      "esbuild",
+      "unrs-resolver",
+      "workerd"
+    ]
+  },
   "devDependencies": {
     "turbo": "latest"
   },

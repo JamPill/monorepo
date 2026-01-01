@@ -45,11 +45,16 @@ export default buildConfig({
 
 // Adapted from https://github.com/opennextjs/opennextjs-cloudflare/blob/d00b3a13e42e65aad76fba41774815726422cc39/packages/cloudflare/src/api/cloudflare-context.ts#L328C36-L328C46
 function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
+  const isBuild =
+    process.env.NEXT_PHASE?.includes('build') ||
+    process.argv.includes('build') ||
+    process.env.CI === 'true'
+
   return import(/* webpackIgnore: true */ `${'__wrangler'.replaceAll('_', '')}`).then(
     ({ getPlatformProxy }) =>
       getPlatformProxy({
         environment: process.env.CLOUDFLARE_ENV,
-        remoteBindings: isProduction && !process.env.NEXT_PHASE?.includes('build'),
+        remoteBindings: isProduction && !isBuild,
       } satisfies GetPlatformProxyOptions),
   )
 }
