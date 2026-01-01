@@ -14,9 +14,13 @@ const dirname = path.dirname(filename)
 
 const isCLI = process.argv.some((value) => value.match(/^(generate|migrate):?/))
 const isProduction = process.env.NODE_ENV === 'production'
+const isBuild =
+  process.env.NEXT_PHASE?.includes('build') ||
+  process.argv.includes('build') ||
+  process.env.CI === 'true'
 
 const cloudflare =
-  isCLI || !isProduction
+  isCLI || !isProduction || isBuild
     ? await getCloudflareContextFromWrangler()
     : await getCloudflareContext({ async: true })
 
@@ -45,11 +49,6 @@ export default buildConfig({
 
 // Adapted from https://github.com/opennextjs/opennextjs-cloudflare/blob/d00b3a13e42e65aad76fba41774815726422cc39/packages/cloudflare/src/api/cloudflare-context.ts#L328C36-L328C46
 function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
-  const isBuild =
-    process.env.NEXT_PHASE?.includes('build') ||
-    process.argv.includes('build') ||
-    process.env.CI === 'true'
-
   return import(/* webpackIgnore: true */ `${'__wrangler'.replaceAll('_', '')}`).then(
     ({ getPlatformProxy }) =>
       getPlatformProxy({
