@@ -39,7 +39,8 @@
     "react": "19.2.1",
     "react-dom": "19.2.1",
     "@repo/ui": "workspace:*",
-    "@repo/schema": "workspace:*"
+    "@repo/schema": "workspace:*",
+    "@repo/eslint-config": "workspace:*"
   },
   "devDependencies": {
     "@playwright/test": "1.56.1",

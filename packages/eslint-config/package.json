@@ -1,0 +1,10 @@
+{
+  "name": "@repo/eslint-config",
+  "version": "0.0.0",
+  "private": true,
+  "main": "index.mjs",
+  "dependencies": {
+    "@eslint/eslintrc": "^3.2.0",
+    "eslint-config-next": "15.4.7"
+  }
+}

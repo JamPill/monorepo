@@ -49,7 +49,7 @@ function getCloudflareContextFromWrangler(): Promise<CloudflareContext> {
     ({ getPlatformProxy }) =>
       getPlatformProxy({
         environment: process.env.CLOUDFLARE_ENV,
-        remoteBindings: isProduction,
+        remoteBindings: isProduction && !process.env.NEXT_PHASE?.includes('build'),
       } satisfies GetPlatformProxyOptions),
   )
 }
