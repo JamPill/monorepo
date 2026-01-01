@@ -1,0 +1,10 @@
+{
+  "name": "@repo/schema",
+  "version": "0.0.0",
+  "private": true,
+  "main": "./index.ts",
+  "types": "./index.ts",
+  "dependencies": {
+    "payload": "3.69.0"
+  }
+}
