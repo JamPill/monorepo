@@ -14,7 +14,10 @@
       "esbuild",
       "unrs-resolver",
       "workerd"
-    ]
+    ],
+    "patchedDependencies": {
+      "@payloadcms/next": "patches/@payloadcms__next.patch"
+    }
   },
   "devDependencies": {
     "turbo": "latest"
