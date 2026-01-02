@@ -5,7 +5,7 @@
   "license": "MIT",
   "type": "module",
   "scripts": {
-    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" opennextjs-cloudflare build",
+    "build": "cross-env NODE_OPTIONS=\"--no-deprecation --max-old-space-size=8000\" next build && opennextjs-cloudflare build --skipBuild",
     "deploy": "pnpm run deploy:app",
     "deploy:app": "npx wrangler deploy",
     "deploy:database": "cross-env NODE_ENV=production PAYLOAD_SECRET=ignore payload migrate && wrangler d1 execute D1 --command 'PRAGMA optimize' --env=$CLOUDFLARE_ENV --remote",
@@ -18,7 +18,7 @@
     "ii": "pnpm install --ignore-workspace",
     "lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
     "payload": "cross-env NODE_OPTIONS=--no-deprecation payload",
-    "preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview --env=$CLOUDFLARE_ENV",
+    "preview": "pnpm run build && opennextjs-cloudflare preview --env=$CLOUDFLARE_ENV",
     "start": "cross-env NODE_OPTIONS=--no-deprecation next start",
     "test": "pnpm run test:int && pnpm run test:e2e",
     "test:e2e": "cross-env NODE_OPTIONS=\"--no-deprecation --no-experimental-strip-types\" pnpm exec playwright test",
