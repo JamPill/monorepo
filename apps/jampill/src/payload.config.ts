@@ -7,7 +7,17 @@ import { CloudflareContext, getCloudflareContext } from '@opennextjs/cloudflare'
 import { GetPlatformProxyOptions } from 'wrangler'
 import { r2Storage } from '@payloadcms/storage-r2'
 
-import { Users, Media, Posts, PostCategories, Header, createSeoPlugin, Pages } from '@repo/schema'
+import {
+  Users,
+  Media,
+  Posts,
+  PostCategories,
+  Header,
+  createSeoPlugin,
+  Pages,
+  locales,
+  defaultLocale,
+} from '@repo/schema'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -37,6 +47,11 @@ export default buildConfig({
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
     outputFile: path.resolve(dirname, 'payload-types.ts'),
+  },
+  localization: {
+    locales: locales.map((l) => l.code),
+    defaultLocale,
+    fallback: true,
   },
   db: sqliteD1Adapter({ binding: cloudflare.env.D1 }),
   plugins: [

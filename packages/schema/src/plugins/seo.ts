@@ -27,5 +27,16 @@ export const createSeoPlugin = ({
     generateURL: ({ doc, collectionSlug }: any) => {
       return `${baseUrl}/${collectionSlug}/${doc?.slug || ''}`
     },
+    fields: ({ defaultFields }) => {
+      return defaultFields.map((field) => {
+        if ('name' in field && ['title', 'description', 'image'].includes(field.name)) {
+          return {
+            ...field,
+            localized: true,
+          }
+        }
+        return field
+      })
+    },
   })
 }

@@ -4,6 +4,7 @@ import * as migration_20260102_133348_add_seo_fields from './20260102_133348_add
 import * as migration_20260102_152728_add_excerpt_and_notes_to_posts from './20260102_152728_add_excerpt_and_notes_to_posts';
 import * as migration_20260102_161348_add_pages_collection_and_blocks from './20260102_161348_add_pages_collection_and_blocks';
 import * as migration_20260102_195633_refactor_blocks_and_posts from './20260102_195633_refactor_blocks_and_posts';
+import * as migration_20260102_203338_i18n_localization from './20260102_203338_i18n_localization';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20260102_195633_refactor_blocks_and_posts.up,
     down: migration_20260102_195633_refactor_blocks_and_posts.down,
-    name: '20260102_195633_refactor_blocks_and_posts'
+    name: '20260102_195633_refactor_blocks_and_posts',
+  },
+  {
+    up: migration_20260102_203338_i18n_localization.up,
+    down: migration_20260102_203338_i18n_localization.down,
+    name: '20260102_203338_i18n_localization'
   },
 ];

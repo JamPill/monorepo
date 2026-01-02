@@ -29,10 +29,12 @@ export const Pages: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'excerpt',
       type: 'textarea',
+      localized: true,
       admin: {
         description: 'Breve riassunto per anteprime e SEO.',
       },
@@ -42,6 +44,7 @@ export const Pages: CollectionConfig = {
       type: 'text',
       unique: true,
       index: true,
+      localized: true,
       admin: {
         position: 'sidebar',
       },
@@ -70,6 +73,7 @@ export const Pages: CollectionConfig = {
       type: 'blocks',
       blocks: [Hero, Content],
       required: true,
+      localized: true,
     },
   ],
 }

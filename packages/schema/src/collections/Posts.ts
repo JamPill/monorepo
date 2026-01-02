@@ -29,10 +29,12 @@ export const Posts: CollectionConfig = {
       name: 'title',
       type: 'text',
       required: true,
+      localized: true,
     },
     {
       name: 'excerpt',
       type: 'textarea',
+      localized: true,
       admin: {
         description: 'Breve riassunto mostrato nelle liste e nelle anteprime.',
       },
@@ -42,6 +44,7 @@ export const Posts: CollectionConfig = {
       type: 'text',
       unique: true,
       index: true,
+      localized: true,
       admin: {
         position: 'sidebar',
       },
@@ -101,6 +104,7 @@ export const Posts: CollectionConfig = {
       type: 'blocks',
       blocks: [Hero, Content],
       required: true,
+      localized: true,
     },
   ],
 }

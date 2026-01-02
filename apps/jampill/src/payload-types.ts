@@ -92,14 +92,19 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
+  fallbackLocale:
+    | ('false' | 'none' | 'null')
+    | false
+    | null
+    | ('en' | 'es' | 'de' | 'fr' | 'it')
+    | ('en' | 'es' | 'de' | 'fr' | 'it')[];
   globals: {
     header: Header;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'es' | 'de' | 'fr' | 'it';
   user: User & {
     collection: 'users';
   };
