@@ -61,4 +61,33 @@ To maximize code reuse and maintain consistency across multiple sites, follow th
 
 ## Deployment (Cloudflare)
 - Each app in `apps/` is a standalone Cloudflare Worker/Page.
-- Deploy using `pnpm build` and `wrangler deploy` inside the specific app directory, or use a root-level turbo command if configured.
+- **Cloudflare Pages Configuration**:
+  - **Build command**: `pnpm run build --filter <app-name>`
+  - **Deploy command**: `pnpm run deploy --filter <app-name>` (ensure this runs `wrangler deploy` inside the app folder)
+  - **Root directory**: `/` (Leave as root to allow Turbo to access workspace packages)
+
+### Troubleshooting Deployment
+- **Infinite Build Loop**: Ensure `build` script in `apps/<app>/package.json` runs `next build` BEFORE `opennextjs-cloudflare build` and uses the `--skipBuild` flag for the latter.
+- **Missing Database Tables (500 Error)**: Deploying the code DOES NOT update the database schema. You must run migrations manually (see Database Management).
+
+## Database Management (Cloudflare D1)
+Payload with D1 adapter requires manual migration management.
+
+### Workflow for Schema Changes
+1. **Modify Schema**: Edit collections in `@repo/schema` or the app's `payload.config.ts`.
+2. **Generate Migration** (Locally):
+   ```bash
+   cd apps/<app-name>
+   pnpm run payload migrate:create <descriptive_name>
+   ```
+   *Note: Ensure packages like `@repo/schema` have `"type": "module"` in `package.json` to avoid import errors.*
+3. **Apply Migration** (Remote D1):
+   ```bash
+   cd apps/<app-name>
+   pnpm run deploy:database
+   ```
+   *This connects to the remote D1 database via Wrangler proxy and applies the changes.*
+
+## Troubleshooting & Tips
+- **ESM Modules**: All shared packages in `packages/` should be configured as ESM (`"type": "module"`) to be correctly resolved by Payload CLI tools.
+- **OpenNext**: Requires `output: 'standalone'` in `next.config.ts`.
