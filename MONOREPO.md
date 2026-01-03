@@ -126,3 +126,30 @@ Fields intended for internal use (like author notes, draft reminders, or audit l
 - Always use `useAsTitle: 'title'` in the collection config.
 - Implement auto-generated slugs using a `beforeValidate` hook based on the `title` field.
 - Place the `slug` field in the sidebar to keep the main content area focused on the text.
+
+## Site Management & Branding
+Starting from Jan 2026, we adopted a centralized "Settings" Global for app-wide configuration.
+
+### 1. Global Settings (@repo/schema)
+- **Slug**: `settings`
+- **Key Features**: Site state (Online, Maintenance, Construction), dynamic logos, typography, and branding colors.
+- **Rule**: Every app must register this Global in its `payload.config.ts`.
+
+### 2. Dynamic Rendering (Next.js 15)
+When an app depends on Payload or D1 data in the Root Layout or Metadata (e.g., to check the site state or fetch colors):
+- **Requirement**: You MUST export `const dynamic = 'force-dynamic'` in `layout.tsx`, `icon.tsx`, and `apple-icon.tsx`.
+- **Reason**: This prevents `next build` from failing due to missing secrets (like `PAYLOAD_SECRET`) or unreachable databases during the static pre-rendering phase on Cloudflare.
+
+### 3. CSS Variables & Typography
+- **Colors**: Injected via `:root` CSS variables (e.g., `--primary-color`) in the Root Layout.
+- **Fonts**: Handled via `next/font/google` with CSS variables mappings. Selection is driven by the `Settings` global.
+
+## Advanced Database Management
+### Migrating to Remote D1
+If you need to apply migrations to the production database:
+1. Ensure your local `.env` is NOT overriding the remote check.
+2. Run:
+   ```bash
+   NODE_ENV=production PAYLOAD_SECRET=<your_secret> pnpm run payload migrate --remote
+   ```
+3. Use `npx wrangler d1 execute <db_name> --remote --command "..."` to verify the table structure if in doubt.
