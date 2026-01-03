@@ -127,6 +127,11 @@ Fields intended for internal use (like author notes, draft reminders, or audit l
 - Implement auto-generated slugs using a `beforeValidate` hook based on the `title` field.
 - Place the `slug` field in the sidebar to keep the main content area focused on the text.
 
+### 3. Language & UI Consistency
+- **Schema & Labels**: Always use English for `slug`, `name`, `label`, and `group` properties in the schema.
+- **Rationale**: This prevents "hybrid" interfaces where system buttons are in English and field labels are in another language, ensuring a professional and consistent look.
+- **Translations**: If Italian labels are strictly required for the end-user editor, implement them using the official Payload i18n object structure (`label: { it: '...', en: '...' }`) instead of hardcoding strings.
+
 ## Site Management & Branding
 Starting from Jan 2026, we adopted a centralized "Settings" Global for app-wide configuration.
 
