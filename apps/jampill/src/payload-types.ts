@@ -100,9 +100,11 @@ export interface Config {
     | ('en' | 'es' | 'de' | 'fr' | 'it')[];
   globals: {
     header: Header;
+    settings: Setting;
   };
   globalsSelect: {
     header: HeaderSelect<false> | HeaderSelect<true>;
+    settings: SettingsSelect<false> | SettingsSelect<true>;
   };
   locale: 'en' | 'es' | 'de' | 'fr' | 'it';
   user: User & {
@@ -588,6 +590,67 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings".
+ */
+export interface Setting {
+  id: number;
+  /**
+   * Stato attuale del sito. "In Manutenzione" bloccherà l'accesso al frontend.
+   */
+  siteState: 'online' | 'maintenance' | 'construction';
+  appName?: string | null;
+  appNameExtended?: string | null;
+  contactUs?: {
+    emails?:
+      | {
+          label: string;
+          email: string;
+          id?: string | null;
+        }[]
+      | null;
+    phones?:
+      | {
+          label: string;
+          phone: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Versione quadrata (per sfondi chiari)
+   */
+  logoSquareLight?: (number | null) | Media;
+  /**
+   * Versione quadrata (per sfondi scuri)
+   */
+  logoSquareDark?: (number | null) | Media;
+  /**
+   * Versione estesa (per sfondi chiari)
+   */
+  logoWideLight?: (number | null) | Media;
+  /**
+   * Versione estesa (per sfondi scuri)
+   */
+  logoWideDark?: (number | null) | Media;
+  colors?: {
+    primary?: string | null;
+    secondary?: string | null;
+    tertiary?: string | null;
+  };
+  typography?: {
+    fontTitle?: ('Inter' | 'Outfit' | 'Roboto') | null;
+    fontBody?: ('Inter' | 'Outfit' | 'Roboto') | null;
+  };
+  accessibility?: {
+    underlineLinks?: boolean | null;
+    accentFocus?: boolean | null;
+    highContrastBorders?: boolean | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "header_select".
  */
 export interface HeaderSelect<T extends boolean = true> {
@@ -605,6 +668,60 @@ export interface HeaderSelect<T extends boolean = true> {
               newTab?: T;
             };
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "settings_select".
+ */
+export interface SettingsSelect<T extends boolean = true> {
+  siteState?: T;
+  appName?: T;
+  appNameExtended?: T;
+  contactUs?:
+    | T
+    | {
+        emails?:
+          | T
+          | {
+              label?: T;
+              email?: T;
+              id?: T;
+            };
+        phones?:
+          | T
+          | {
+              label?: T;
+              phone?: T;
+              id?: T;
+            };
+      };
+  logoSquareLight?: T;
+  logoSquareDark?: T;
+  logoWideLight?: T;
+  logoWideDark?: T;
+  colors?:
+    | T
+    | {
+        primary?: T;
+        secondary?: T;
+        tertiary?: T;
+      };
+  typography?:
+    | T
+    | {
+        fontTitle?: T;
+        fontBody?: T;
+      };
+  accessibility?:
+    | T
+    | {
+        underlineLinks?: T;
+        accentFocus?: T;
+        highContrastBorders?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -13,6 +13,7 @@ import {
   Posts,
   PostCategories,
   Header,
+  Settings,
   createSeoPlugin,
   Pages,
   locales,
@@ -43,7 +44,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, PostCategories, Posts, Pages],
-  globals: [Header],
+  globals: [Header, Settings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
