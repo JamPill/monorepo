@@ -36,7 +36,7 @@ export const Pages: CollectionConfig = {
       type: 'textarea',
       localized: true,
       admin: {
-        description: 'Breve riassunto per anteprime e SEO.',
+        description: 'Brief summary for previews and SEO.',
       },
     },
     {
@@ -65,7 +65,7 @@ export const Pages: CollectionConfig = {
       type: 'textarea',
       admin: {
         position: 'sidebar',
-        description: 'Appunti editoriali interni.',
+        description: 'Internal editorial notes.',
       },
     },
     {

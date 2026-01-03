@@ -36,7 +36,7 @@ export const Posts: CollectionConfig = {
       type: 'textarea',
       localized: true,
       admin: {
-        description: 'Breve riassunto mostrato nelle liste e nelle anteprime.',
+        description: 'Brief summary shown in lists and previews.',
       },
     },
     {
@@ -65,7 +65,7 @@ export const Posts: CollectionConfig = {
       type: 'textarea',
       admin: {
         position: 'sidebar',
-        description: 'Appunti editoriali non visibili sul sito.',
+        description: 'Internal editorial notes not visible on the site.',
       },
     },
     {

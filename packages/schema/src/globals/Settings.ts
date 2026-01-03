@@ -6,14 +6,14 @@ export const Settings: GlobalConfig = {
     read: () => true,
   },
   admin: {
-    group: 'Configurazione',
+    group: 'Configuration',
   },
   fields: [
     {
       type: 'tabs',
       tabs: [
         {
-          label: 'Generale',
+          label: 'General',
           fields: [
             {
               name: 'siteState',
@@ -22,12 +22,11 @@ export const Settings: GlobalConfig = {
               required: true,
               options: [
                 { label: 'Online', value: 'online' },
-                { label: 'In Manutenzione', value: 'maintenance' },
-                { label: 'In Costruzione', value: 'construction' },
+                { label: 'Maintenance', value: 'maintenance' },
+                { label: 'Construction', value: 'construction' },
               ],
               admin: {
-                description:
-                  'Stato attuale del sito. "In Manutenzione" bloccherà l\'accesso al frontend.',
+                description: 'Current site state. "Maintenance" will block frontend access.',
               },
             },
             {
@@ -56,8 +55,18 @@ export const Settings: GlobalConfig = {
                     {
                       type: 'row',
                       fields: [
-                        { name: 'label', type: 'text', required: true, admin: { width: '40%' } },
-                        { name: 'email', type: 'text', required: true, admin: { width: '60%' } },
+                        {
+                          name: 'label',
+                          type: 'text',
+                          required: true,
+                          admin: { width: '40%' },
+                        },
+                        {
+                          name: 'email',
+                          type: 'text',
+                          required: true,
+                          admin: { width: '60%' },
+                        },
                       ],
                     },
                   ],
@@ -69,8 +78,18 @@ export const Settings: GlobalConfig = {
                     {
                       type: 'row',
                       fields: [
-                        { name: 'label', type: 'text', required: true, admin: { width: '40%' } },
-                        { name: 'phone', type: 'text', required: true, admin: { width: '60%' } },
+                        {
+                          name: 'label',
+                          type: 'text',
+                          required: true,
+                          admin: { width: '40%' },
+                        },
+                        {
+                          name: 'phone',
+                          type: 'text',
+                          required: true,
+                          admin: { width: '60%' },
+                        },
                       ],
                     },
                   ],
@@ -80,7 +99,7 @@ export const Settings: GlobalConfig = {
           ],
         },
         {
-          label: 'Loghi',
+          label: 'Logos',
           fields: [
             {
               type: 'row',
@@ -89,13 +108,13 @@ export const Settings: GlobalConfig = {
                   name: 'logoSquareLight',
                   type: 'upload',
                   relationTo: 'media',
-                  admin: { width: '50%', description: 'Versione quadrata (per sfondi chiari)' },
+                  admin: { width: '50%', description: 'Square version (for light backgrounds)' },
                 },
                 {
                   name: 'logoSquareDark',
                   type: 'upload',
                   relationTo: 'media',
-                  admin: { width: '50%', description: 'Versione quadrata (per sfondi scuri)' },
+                  admin: { width: '50%', description: 'Square version (for dark backgrounds)' },
                 },
               ],
             },
@@ -106,20 +125,20 @@ export const Settings: GlobalConfig = {
                   name: 'logoWideLight',
                   type: 'upload',
                   relationTo: 'media',
-                  admin: { width: '50%', description: 'Versione estesa (per sfondi chiari)' },
+                  admin: { width: '50%', description: 'Wide version (for light backgrounds)' },
                 },
                 {
                   name: 'logoWideDark',
                   type: 'upload',
                   relationTo: 'media',
-                  admin: { width: '50%', description: 'Versione estesa (per sfondi scuri)' },
+                  admin: { width: '50%', description: 'Wide version (for dark backgrounds)' },
                 },
               ],
             },
           ],
         },
         {
-          label: 'Aspetto (Colori)',
+          label: 'Appearance (Colors)',
           fields: [
             {
               type: 'group',
@@ -162,9 +181,9 @@ export const Settings: GlobalConfig = {
                       type: 'select',
                       defaultValue: 'Inter',
                       options: [
-                        { label: 'Inter (Moderno)', value: 'Inter' },
-                        { label: 'Outfit (Geometrico)', value: 'Outfit' },
-                        { label: 'Gantari (Elegante)', value: 'Gantari' },
+                        { label: 'Inter (Modern)', value: 'Inter' },
+                        { label: 'Outfit (Geometric)', value: 'Outfit' },
+                        { label: 'Gantari (Elegant)', value: 'Gantari' },
                         { label: 'Plus Jakarta Sans', value: 'PlusJakartaSans' },
                         { label: 'Montserrat', value: 'Montserrat' },
                         { label: 'Roboto (Standard)', value: 'Roboto' },
@@ -192,7 +211,7 @@ export const Settings: GlobalConfig = {
           ],
         },
         {
-          label: 'Accessibilità',
+          label: 'Accessibility',
           fields: [
             {
               name: 'accessibility',
@@ -202,19 +221,19 @@ export const Settings: GlobalConfig = {
                   name: 'underlineLinks',
                   type: 'checkbox',
                   defaultValue: false,
-                  label: 'Sottolinea sempre i link',
+                  label: 'Always underline links',
                 },
                 {
                   name: 'accentFocus',
                   type: 'checkbox',
                   defaultValue: true,
-                  label: 'Focus evidenziato su pulsanti e input',
+                  label: 'High visibility focus on buttons and inputs',
                 },
                 {
                   name: 'highContrastBorders',
                   type: 'checkbox',
                   defaultValue: false,
-                  label: 'Bordi ad alto contrasto sugli input',
+                  label: 'High contrast borders on inputs',
                 },
               ],
             },

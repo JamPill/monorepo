@@ -193,12 +193,12 @@ export interface Post {
   id: number;
   title: string;
   /**
-   * Breve riassunto mostrato nelle liste e nelle anteprime.
+   * Brief summary shown in lists and previews.
    */
   excerpt?: string | null;
   slug?: string | null;
   /**
-   * Appunti editoriali non visibili sul sito.
+   * Internal editorial notes not visible on the site.
    */
   notes?: string | null;
   authors: (number | User)[];
@@ -255,12 +255,12 @@ export interface Page {
   id: number;
   title: string;
   /**
-   * Breve riassunto per anteprime e SEO.
+   * Brief summary for previews and SEO.
    */
   excerpt?: string | null;
   slug?: string | null;
   /**
-   * Appunti editoriali interni.
+   * Internal editorial notes.
    */
   notes?: string | null;
   blocks: (
@@ -595,7 +595,7 @@ export interface Header {
 export interface Setting {
   id: number;
   /**
-   * Stato attuale del sito. "In Manutenzione" bloccherà l'accesso al frontend.
+   * Current site state. "Maintenance" will block frontend access.
    */
   siteState: 'online' | 'maintenance' | 'construction';
   appName?: string | null;
@@ -617,19 +617,19 @@ export interface Setting {
       | null;
   };
   /**
-   * Versione quadrata (per sfondi chiari)
+   * Square version (for light backgrounds)
    */
   logoSquareLight?: (number | null) | Media;
   /**
-   * Versione quadrata (per sfondi scuri)
+   * Square version (for dark backgrounds)
    */
   logoSquareDark?: (number | null) | Media;
   /**
-   * Versione estesa (per sfondi chiari)
+   * Wide version (for light backgrounds)
    */
   logoWideLight?: (number | null) | Media;
   /**
-   * Versione estesa (per sfondi scuri)
+   * Wide version (for dark backgrounds)
    */
   logoWideDark?: (number | null) | Media;
   colors?: {
