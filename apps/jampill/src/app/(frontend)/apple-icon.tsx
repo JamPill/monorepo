@@ -3,6 +3,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 
 export const alt = 'Apple Icon'
+export const dynamic = 'force-dynamic'
 export const size = {
   width: 180,
   height: 180,

@@ -4,6 +4,7 @@ import config from '@payload-config'
 
 // Image metadata
 export const alt = 'Favicon'
+export const dynamic = 'force-dynamic'
 export const size = {
   width: 32,
   height: 32,

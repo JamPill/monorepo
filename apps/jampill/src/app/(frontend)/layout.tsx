@@ -28,6 +28,8 @@ const fontMap = {
   Roboto: roboto,
 }
 
+export const dynamic = 'force-dynamic'
+
 export async function generateMetadata() {
   const payload = await getPayload({ config })
   const settings = await payload.findGlobal({ slug: 'settings' })
