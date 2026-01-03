@@ -4,6 +4,7 @@ import { Inter, Outfit, Roboto, Gantari, Plus_Jakarta_Sans, Montserrat } from 'n
 import { Header } from '@/components/Header'
 import { Maintenance } from '@/components/Maintenance'
 import { NO_INDEX_METADATA } from '@repo/ui'
+import { unstable_cache } from 'next/cache'
 import './styles.css'
 
 const inter = Inter({
@@ -37,11 +38,17 @@ const roboto = Roboto({
   variable: '--font-roboto',
 })
 
-export const dynamic = 'force-dynamic'
+const getCachedSettings = unstable_cache(
+  async () => {
+    const payload = await getPayload({ config })
+    return payload.findGlobal({ slug: 'settings' })
+  },
+  ['settings-global'],
+  { tags: ['global_settings'] },
+)
 
 export async function generateMetadata() {
-  const payload = await getPayload({ config })
-  const settings = await payload.findGlobal({ slug: 'settings' })
+  const settings = await getCachedSettings()
 
   return {
     title: settings.appName || 'Payload Blank Template',
@@ -52,8 +59,7 @@ export async function generateMetadata() {
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
-  const payload = await getPayload({ config })
-  const settings = await payload.findGlobal({ slug: 'settings' })
+  const settings = await getCachedSettings()
 
   const brandStyles = `
     :root {

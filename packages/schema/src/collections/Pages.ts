@@ -1,4 +1,5 @@
 import type { CollectionConfig } from 'payload'
+import { revalidateCollection } from '../hooks/revalidate'
 import { Hero } from '../blocks/Hero'
 import { Content } from '../blocks/Content'
 
@@ -13,6 +14,9 @@ export const Pages: CollectionConfig = {
     drafts: {
       autosave: true,
     },
+  },
+  hooks: {
+    afterChange: [revalidateCollection((doc) => `page_${doc.slug}`)],
   },
   access: {
     read: ({ req: { user } }) => {

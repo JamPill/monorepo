@@ -1,4 +1,5 @@
 import type { GlobalConfig } from 'payload'
+import { revalidateGlobal } from '../hooks/revalidate'
 
 export const Settings: GlobalConfig = {
   slug: 'settings',
@@ -7,6 +8,9 @@ export const Settings: GlobalConfig = {
   },
   admin: {
     group: 'Configuration',
+  },
+  hooks: {
+    afterChange: [revalidateGlobal('global_settings')],
   },
   fields: [
     {

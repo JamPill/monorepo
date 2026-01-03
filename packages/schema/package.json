@@ -9,5 +9,8 @@
     "@payloadcms/email-resend": "^3.69.0",
     "@payloadcms/plugin-seo": "^3.69.0",
     "payload": "3.69.0"
+  },
+  "devDependencies": {
+    "next": "15.4.10"
   }
 }

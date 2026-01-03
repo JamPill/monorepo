@@ -140,10 +140,12 @@ Starting from Jan 2026, we adopted a centralized "Settings" Global for app-wide 
 - **Key Features**: Site state (Online, Maintenance, Construction), dynamic logos, typography, and branding colors.
 - **Rule**: Every app must register this Global in its `payload.config.ts`.
 
-### 2. Dynamic Rendering (Next.js 15)
-When an app depends on Payload or D1 data in the Root Layout or Metadata (e.g., to check the site state or fetch colors):
-- **Requirement**: You MUST export `const dynamic = 'force-dynamic'` in `layout.tsx`, `icon.tsx`, and `apple-icon.tsx`.
-- **Reason**: This prevents `next build` from failing due to missing secrets (like `PAYLOAD_SECRET`) or unreachable databases during the static pre-rendering phase on Cloudflare.
+### 2. Performance & Edge Caching (Next.js 15)
+To ensure sub-50ms response times (TTFB) while maintaining real-time updates, we use **On-Demand Edge Invalidation**.
+- **Strategy**: Instead of `force-dynamic`, we wrap Payload data fetching in `unstable_cache` with specific tags.
+- **Shared Hooks**: Schema definitions in `@repo/schema` must use `revalidateCollection` or `revalidateGlobal` in their `afterChange` hooks.
+- **Granular Tags**: We use tags like `global_settings`, `global_header`, and `page_[slug]` to invalidate only the necessary parts of the cache.
+- **Build Safety**: Using `unstable_cache` allows us to skip DB-dependent pre-rendering during `next build` on Cloudflare without resorting to `force-dynamic` everywhere.
 
 ### 3. CSS Variables & Typography
 - **Colors**: Injected via `:root` CSS variables (e.g., `--primary-color`) in the Root Layout.

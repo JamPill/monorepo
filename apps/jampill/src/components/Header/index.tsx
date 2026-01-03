@@ -1,15 +1,23 @@
-import React from 'react'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { NavbarClient } from '@repo/ui'
+import { unstable_cache } from 'next/cache'
+import React from 'react'
+
+const getCachedHeader = unstable_cache(
+  async () => {
+    const payload = await getPayload({ config })
+    return payload.findGlobal({
+      slug: 'header',
+      depth: 1,
+    })
+  },
+  ['header-global'],
+  { tags: ['global_header'] },
+)
 
 export const Header = async () => {
-  const payload = await getPayload({ config })
-
-  const headerData = await payload.findGlobal({
-    slug: 'header',
-    depth: 1, // To populate the logo image and post references
-  })
+  const headerData = await getCachedHeader()
 
   return <NavbarClient data={headerData} />
 }
